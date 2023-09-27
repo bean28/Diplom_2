@@ -37,9 +37,9 @@ public class UserCreateParameterizedTest extends BaseTest {
     @DisplayName("Create user")
     public void createUserTest() {
         Response response = userClient.createUser(new User(email, password, name));
+        token = response.getBody().path("accessToken");
         response.then().assertThat().statusCode(200);
         response.then().assertThat().body("success", equalTo(true));
-        token = response.getBody().path("accessToken");
     }
 
     @After
